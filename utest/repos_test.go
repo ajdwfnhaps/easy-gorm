@@ -1,10 +1,3 @@
-# easy-gorm
-easy-gorm封装包
-
-
-- **依赖注入及gorm仓储模式使用**
-```go
-
 package utest
 
 import (
@@ -12,9 +5,9 @@ import (
 	"reflect"
 	"testing"
 
-	"gitlab.aam.test/aam_go_pkg/agorm"
-	"gitlab.aam.test/aam_go_pkg/agorm/icore"
-	"gitlab.aam.test/aam_go_pkg/agorm/repos"
+	easygorm "github.com/ajdwfnhaps/easy-gorm"
+	"github.com/ajdwfnhaps/easy-gorm/icore"
+	"github.com/ajdwfnhaps/easy-gorm/repos"
 
 	"github.com/jinzhu/gorm"
 	"go.uber.org/dig"
@@ -123,18 +116,18 @@ func TestCreate(t *testing.T) {
 
 func NewDb() (*gorm.DB, error) {
 
-	db, _, err := agorm.UseGorm(&agorm.Option{
+	db, _, err := easygorm.UseGorm(&easygorm.Option{
 		Debug:        true,
 		DBType:       "mysql",
 		MaxLifetime:  7200, //设置连接可以重用的最长时间(单位：秒)
 		MaxOpenConns: 150,  //设置数据库的最大打开连接数
 		MaxIdleConns: 50,   //设置空闲连接池中的最大连接数
-		MySQL: agorm.MySQLConf{
+		MySQL: easygorm.MySQLConf{
 			Host:     "127.0.0.1",
-			Port:     3306,
+			Port:     13306,
 			User:     "root",
-			Password: "88888888",
-			DBName:   "temp_db",
+			Password: "123456",
+			DBName:   "test_db",
 		},
 	})
 
@@ -182,6 +175,3 @@ func buildContainer() *dig.Container {
 	return container
 
 }
-
-
-```
